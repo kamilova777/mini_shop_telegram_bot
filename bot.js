@@ -174,18 +174,32 @@ else if (text=="Sozlamalar ⚙️") {
 })
 
 bot.on("callback_query", (query) => {
-   const chatId=query.message.chat.id
-   const data=query.message.date
+   const chatid = query.message.chat.id;
+   const data = query.data;
    const userId = query.from.id;
    const messageId = query.message.message_id;
 
+   // Tugma bosilganini tasdiqlash
+   bot.answerCallbackQuery(query.id);
 
-   if (data == ""){
-
+   if (data == "women_dresses") {
+        // Rasmning bevosita (direct) URL manzili
+        const imageUrl = "https://i.pinimg.com/736x/6f/7b/bb/6f7bbbaea577e0ae66a6173de112f7ef.jpg"; // haqiqiy rasm linki
+        
+        bot.sendPhoto(chatid, imageUrl, {
+            caption: "👗 **Ko‘ylak**\n\n💰 Narxi: 250,000 so'm\n\n📝 Zamonaviy va qulay dizayn.\n\n✅ Savatga qo'shish uchun tugmani bosing.",
+            parse_mode: "Markdown",
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: "✅ Savatga qo'shish", callback_data: "add_women_dresses" }],
+                    [{ text: "🔙 Orqaga", callback_data: "back" }]
+                ]
+            }
+        });
    }
+});
 
 
 
 
 
-})
